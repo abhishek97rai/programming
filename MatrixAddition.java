@@ -16,7 +16,6 @@ public class MatrixAddition {
     }
     
     public static void main(String[] args) {
-        MatrixAddition matrix = new MatrixAddition();
         int[][] a = {
             {2, 5, 4, 9},
             {0, 9, 6, 3},
