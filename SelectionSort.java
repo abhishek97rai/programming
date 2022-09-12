@@ -2,21 +2,16 @@ public class SelectionSort {
     
     //select/find minimum in each iteration, and swap it with first element of the unsorted array
     static void selectionSort(int[] arr) {
-        int min;
+        
         for (int i = 0; i < arr.length-1; i++) {
-            min = arr[i];
-            boolean swap = false;
-            int index = -1;
+            int minIndex = i;
             for (int j = i+1; j < arr.length; j++) {
-                if (arr[j] < min) {
-                    min = arr[j];
-                    swap = true;
-                    index = j;
-                }
+                if (arr[j] < arr[minIndex])
+                    minIndex = j;
             }
-            if (swap) {
-                int temp = min;
-                arr[index] = arr[i];
+            if (minIndex != i) {
+                int temp = arr[minIndex];
+                arr[minIndex] = arr[i];
                 arr[i] = temp;
             }
         }
