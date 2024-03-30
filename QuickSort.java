@@ -1,42 +1,45 @@
-public class QuickSort {
+class QuickSort {
     
-    //use pivot and find its correct position such that left side is all small and right side is all large, and thus sort recursively
-    static void quickSort(int[] arr, int low, int high) {
-        if (low < high) {
-            int pivot = partition(arr, low, high);
-            quickSort(arr, low, pivot-1);
-            quickSort(arr, pivot+1, high);
+  public static void main(String[] args) {
+    int[] arr = {6, -3, 0, -1, 3, 6, 9, 100, 4};
+    System.out.println(Arrays.toString(arr));
+    quickSort(arr);
+    System.out.println(Arrays.toString(arr));
+  }
+
+  public static void quickSort(int[] nums) {
+    quickSort(nums, 0, nums.length-1);
+  }
+
+  public static void quickSort(int[] nums, int l, int r) {
+    if (l < r) {
+        //pivot is index of actual pivot element
+        int pivot = partition(nums, l, r);
+        quickSort(nums, l, pivot-1);
+        quickSort(nums, pivot+1, r);
+    }
+  }
+
+  public static int partition(int[] nums, int l, int r) {
+    //take last element as pivot
+    int pivot = nums[r];
+    int i = l-1;
+    for (int j = l; j < r; j++) {
+        if (nums[j] < pivot) {
+            i++;
+            swap(nums, i, j);
         }
     }
-    
-    static int partition(int[] arr, int low, int high) {
-        int pivot = arr[high];
-        int i = low-1;
-        for (int j = low; j < high; j++) {
-            if (arr[j] < pivot) {
-                i++;
-                swap(arr, i, j);
-            }
-        }
-        swap(arr, i+1, high);
-        return i+1;
-    }
-    
-    static void swap(int[] arr, int a, int b) {
-        int temp = arr[a];
-        arr[a] = arr[b];
-        arr[b] = temp;
-    }
-    
-    public static void main(String[] args) {
-        int[] nums = {4, 2, 5, 0, 11, 1, 2, 7, -3, 9};
-        System.out.println("Quick sorting:");
-        quickSort(nums, 0, nums.length-1);
-        int k;
-        for (k = 0; k < nums.length-1; k++) {
-            System.out.print(nums[k] + ", ");    
-        }
-        System.out.print(nums[k]);
-    }
+    //swap nums[i+1] with nums[r], ie pivot, to set pivot to its correct position
+    swap(nums, i+1, r);
+    //return correct index of pivot, for which all elements to the left are smaller than it and right are greater than or equal to it
+    return i+1;
+  }
+
+  public static void swap(int[] nums, int i, int j) {
+    int temp = nums[i];
+    nums[i] = nums[j];
+    nums[j] = temp;
+  }
     
 }
