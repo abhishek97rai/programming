@@ -18,6 +18,7 @@ class Solution {
   }
 }
 
+//Usage - eg: DataSource, so that only once connection is maintained
 class Singleton {
     private static Singleton instance;
 
